@@ -58,6 +58,7 @@ public class GlobalTransactionContext {
      * @return new context if no existing there.
      */
     public static GlobalTransaction getCurrentOrCreate() {
+        //从当前线程ThreadLocal拿全局事务对象
         GlobalTransaction tx = getCurrent();
         if (tx == null) {
             return createNew();

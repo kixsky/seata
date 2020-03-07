@@ -44,6 +44,8 @@ public class TransactionalTemplate {
      * @throws TransactionalExecutor.ExecutionException the execution exception
      */
     public Object execute(TransactionalExecutor business) throws Throwable {
+
+        //获得或者创建一个事务
         // 1. get or create a transaction
         GlobalTransaction tx = GlobalTransactionContext.getCurrentOrCreate();
 
@@ -54,12 +56,14 @@ public class TransactionalTemplate {
         }
         try {
 
+            //开始事务
             // 2. begin transaction
             beginTransaction(txInfo, tx);
 
             Object rs = null;
             try {
 
+                //执行业务方法
                 // Do Your Business
                 rs = business.execute();
 
@@ -70,6 +74,7 @@ public class TransactionalTemplate {
                 throw ex;
             }
 
+            //全局提交事务
             // 4. everything is fine, commit.
             commitTransaction(tx);
 

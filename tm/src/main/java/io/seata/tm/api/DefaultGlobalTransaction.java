@@ -99,9 +99,10 @@ public class DefaultGlobalTransaction implements GlobalTransaction {
         if (RootContext.getXID() != null) {
             throw new IllegalStateException();
         }
+        //向seata-server申请全局事务Id
         xid = transactionManager.begin(null, null, name, timeout);
-        status = GlobalStatus.Begin;
-        RootContext.bind(xid);
+        status = GlobalStatus.Begin; //状态置为开始
+        RootContext.bind(xid); //绑定事务Id
         if (LOGGER.isInfoEnabled()) {
             LOGGER.info("Begin new global transaction [{}]", xid);
         }

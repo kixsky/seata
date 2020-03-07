@@ -26,11 +26,11 @@ public enum GlobalTransactionRole {
      * The Launcher.
      */
     // The one begins the current global transaction.
-    Launcher,
+    Launcher, //事务发起者
 
     /**
      * The Participant.
      */
     // The one just joins into a existing global transaction.
-    Participant
+    Participant //事务参与者
 }
